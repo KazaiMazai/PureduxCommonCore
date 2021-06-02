@@ -63,7 +63,7 @@ public extension Entities {
     }
 
     mutating func save(_ item: T,
-                       with updating: Merging<T, T> = .replace(),
+                       with updating: Merging<T, T> = .replace,
                        timestamp: Date) {
 
         let updatedItem = storage[item.id].map { existing in
@@ -74,7 +74,7 @@ public extension Entities {
     }
 
     mutating func saveAll(_ items: [T],
-                          with updating: Merging<T, T> = .replace(),
+                          with updating: Merging<T, T> = .replace,
                           timestamp: Date) {
 
         items.forEach { save($0, with: updating, timestamp: timestamp) }
