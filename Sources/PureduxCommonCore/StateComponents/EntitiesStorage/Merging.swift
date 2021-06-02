@@ -16,8 +16,8 @@ public struct Merging<Existing, New> {
 
 }
 
-public extension Merging {
-    static func replace<Existing>() -> Merging<Existing, Existing> {
+extension Merging {
+    public static func replace<Existing>() -> Merging<Existing, Existing> {
         Merging<Existing, Existing>(merge: { _, new in new })
     }
 }
