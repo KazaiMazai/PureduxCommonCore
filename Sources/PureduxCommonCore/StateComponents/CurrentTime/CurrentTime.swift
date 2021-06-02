@@ -20,7 +20,7 @@ public struct CurrentTime: Codable {
 
     public private(set) var request: RequestState<SingleRequest>
 
-    mutating func handleTimeChanged(_ now: Date, nextRequestId: UUID) {
+    public mutating func handleTimeChanged(_ now: Date, nextRequestId: UUID) {
         time = now
         request = .inProgress(SingleRequest(id: RequestID(rawValue: nextRequestId)))
     }
