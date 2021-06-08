@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct DelayedJob {
+public struct DelayedJob: Codable {
     public private(set) var request: RequestState<DelayedRequest> = .none
     private let interval: TimeInterval
 
@@ -17,6 +17,13 @@ public struct DelayedJob {
 }
 
 public extension DelayedJob {
+    mutating func forceSchedule(now: Date, makeUUID: () -> UUID) {
+        request = .inProgress(
+            DelayedRequest(
+                id: RequestID(rawValue: makeUUID()),
+                performAfter: now))
+    }
+
     mutating func scheduleIfNeeded(now: Date, makeUUID: () -> UUID) {
         if request.isInProgress {
             return
